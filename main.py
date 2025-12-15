@@ -26,6 +26,12 @@ with sync_playwright() as p:
     page.fill('input[name="password"]', PASSWORD)
     logger.info("Данные для входа введены")
 
+    page.click('button[type="submit"]')
+    logger.info("Кнопка ввода нажата")
+
+    page.wait_for_timeout(5000)
+    logger.success(f"Вход выполнен. {page.url}")
+
 
     input("Нажмите Enter для закрытия...")
     brower.close()
