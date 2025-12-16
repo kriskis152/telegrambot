@@ -8,6 +8,8 @@ load_dotenv(find_dotenv())
 
 LOGIN = os.getenv('LOGIN')
 PASSWORD = os.getenv('PASSWORD')
+LOGIN1 = os.getenv('LOGIN1')
+PASSWORD1 = os.getenv('PASSWORD1')
 logger.info("Запуск браузера...")
 
 with sync_playwright() as p:
@@ -32,6 +34,17 @@ with sync_playwright() as p:
     page.wait_for_timeout(5000)
     logger.success(f"Вход выполнен. {page.url}")
 
+    page.goto('https://journal.top-academy.ru/ru/main/homework/page/index')
+    logger.info("Зашли на страницу с домашним заданием")
+
+    page2 = brower.new_page()
+    page2.goto('https://github.com/login')
+    logger.info('Открыли github')
+
+    page.wait_for_selector('input[name="username"]', timeout=10000)
+    page.fill('input[name="username"]', LOGIN1)
+    page.fill('input[name="password"]', PASSWORD1)
+    logger.info("Данные для входа введены")
 
     input("Нажмите Enter для закрытия...")
     brower.close()
