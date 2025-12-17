@@ -38,13 +38,17 @@ with sync_playwright() as p:
     logger.info("Зашли на страницу с домашним заданием")
 
     page2 = brower.new_page()
-    page2.goto('https://github.com/login')
+    namestudent = input("Введите имя на github: ")
+    page2.goto('https://github.com/' + namestudent)
     logger.info('Открыли github')
 
-    page.wait_for_selector('input[name="username"]', timeout=10000)
-    page.fill('input[name="username"]', LOGIN1)
-    page.fill('input[name="password"]', PASSWORD1)
-    logger.info("Данные для входа введены")
+    page2.click('<span data-view-component="true" class="">Repositories</span>')
+    logger.info('Перешли к выбору репозитория')
+
+   # page2.wait_for_selector('input[name="username"]', timeout=10000)
+   # #page2.fill('input[name="username"]', LOGIN1)
+   # page2.fill('input[name="password"]', PASSWORD1)
+   # logger.info("Данные для входа введены")
 
     input("Нажмите Enter для закрытия...")
     brower.close()
